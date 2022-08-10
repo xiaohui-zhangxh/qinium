@@ -1,0 +1,51 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://uc.qbox.me/v1/query?ak=masked-access-key&bucket=baklib
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      - "*/*"
+      User-Agent:
+      - QiniumRuby/0.1.0 (x86_64-darwin21) Ruby/2.7.5
+      Host:
+      - uc.qbox.me
+      Connection:
+      - close
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - openresty
+      Date:
+      - Wed, 10 Aug 2022 10:26:24 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '513'
+      Connection:
+      - close
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - X-Log, X-Reqid
+      Access-Control-Max-Age:
+      - '2592000'
+      X-Log:
+      - redis.g;redis.g;BUCKET
+      X-Reqid:
+      - "-U0AALpdoOHg9AkX"
+    body:
+      encoding: UTF-8
+      string: '{"ttl":86400,"http":{"api":["http://api-z2.qiniu.com"],"io":["http://iovip-z2.qbox.me"],"rs":["http://rs-z2.qiniu.com"],"rsf":["http://rsf-z2.qiniu.com"],"uc":["http://uc.qbox.me"],"up":["http://up-z2.qiniu.com","http://upload-z2.qiniu.com","-H
+        up-z2.qiniu.com http://14.29.110.6"]},"https":{"api":["https://api-z2.qiniu.com"],"io":["https://iovip-z2.qbox.me"],"rs":["https://rs-z2.qbox.me"],"rsf":["https://rsf-z2.qbox.me"],"uc":["https://uc.qbox.me"],"up":["https://up-z2.qbox.me","https://upload-z2.qbox.me"]}}'
+  recorded_at: Wed, 10 Aug 2022 10:26:24 GMT
+recorded_with: VCR 6.1.0
