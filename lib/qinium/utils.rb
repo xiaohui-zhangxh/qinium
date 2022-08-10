@@ -3,15 +3,15 @@ class Qinium
     extend self
 
     def urlsafe_base64_encode(content)
-      Base64.encode64(content).strip.gsub('+', '-').gsub('/', '_').gsub(/\r?\n/, '')
+      Base64.encode64(content).strip.gsub("+", "-").gsub("/", "_").gsub(/\r?\n/, "")
     end
 
     def urlsafe_base64_decode(encoded_content)
-      Base64.decode64 encoded_content.gsub('_', '/').gsub('-', '+')
+      Base64.decode64 encoded_content.gsub("_", "/").gsub("-", "+")
     end
 
     def encode_entry_uri(bucket, key)
-      entry_uri = bucket + ':' + key
+      entry_uri = bucket + ":" + key
       urlsafe_base64_encode(entry_uri)
     end
 
@@ -33,7 +33,7 @@ class Qinium
 
         args.push("#{CGI.escape(key.to_s)}=#{CGI.escape(value.to_s)}")
       end
-      args.join('&')
+      args.join("&")
     end
 
     def logger

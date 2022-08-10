@@ -8,10 +8,10 @@ class Qinium
       @client = client
     end
 
-    # rubocop: disable Style/SingleLineMethods, Rails/Delegate
+    # rubocop: disable Style/SingleLineMethods
     def config; client.config end
     def bucket; config.bucket end
-    # rubocop: enable Style/SingleLineMethods, Rails/Delegate
+    # rubocop: enable Style/SingleLineMethods
 
     def mkblk(blk, token:, host: nil)
       host ||= config.up_host

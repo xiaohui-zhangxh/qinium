@@ -8,11 +8,11 @@ class Qinium
       @config = config
     end
 
-    # rubocop: disable Style/SingleLineMethods, Rails/Delegate
+    # rubocop: disable Style/SingleLineMethods
     def user_agent; config.user_agent end
     def access_key; config.access_key end
     def secret_key; config.secret_key end
-    # rubocop: enable Style/SingleLineMethods, Rails/Delegate
+    # rubocop: enable Style/SingleLineMethods
 
     def get(url, opts = {})
       opts[:raise] = true unless opts.key?(:raise)
@@ -73,7 +73,7 @@ class Qinium
       end
 
       logger.debug "POST #{uri}"
-      logger.debug "    body: #{req_body[0,50]}"
+      logger.debug "    body: #{req_body[0, 50]}"
       logger.debug " headers: #{opts.to_json}"
 
       req = Net::HTTP::Post.new(uri)

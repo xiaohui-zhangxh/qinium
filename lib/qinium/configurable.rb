@@ -11,7 +11,7 @@ class Qinium
     end
 
     def method_missing(method, *args)
-      if method.to_s.end_with?('=')
+      if method.to_s.end_with?("=")
         self[method.to_s[0..-2].to_sym] = args[0]
       else
         fetch(method.to_sym)
@@ -19,7 +19,7 @@ class Qinium
     end
 
     def respond_to_missing?(method)
-      key = method.to_s.end_with?('=') ? method.to_s[0..-2].to_sym : method
+      key = method.to_s.end_with?("=") ? method.to_s[0..-2].to_sym : method
       key?(key)
     end
   end

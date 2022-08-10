@@ -10,13 +10,13 @@ class Qinium
         @mutex.synchronize do
           key = cache_key(access_key, bucket)
           data = @hosts[key]
-          if data && Time.now.to_i > data['expires_at']
+          if data && Time.now.to_i > data["expires_at"]
             @hosts.delete key
             data = nil
           end
           if data.nil?
             data = block.call
-            data['expires_at'] = Time.now.to_i + data['ttl']
+            data["expires_at"] = Time.now.to_i + data["ttl"]
             @hosts[key] = data.freeze
           end
           data
@@ -56,7 +56,7 @@ class Qinium
 
     def up_hosts(bucket, opts = {})
       hosts = hosts(bucket)
-      hosts[extract_protocol(opts)]['up']
+      hosts[extract_protocol(opts)]["up"]
     end
 
     def hosts(bucket)
