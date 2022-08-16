@@ -73,7 +73,7 @@ class Qinium
       end
 
       logger.debug "POST #{uri}"
-      logger.debug "    body: #{req_body[0, 50]}"
+      logger.debug "    body: #{req_body[0, 50]}" if req_body.is_a?(String)
       logger.debug " headers: #{opts.to_json}"
 
       req = Net::HTTP::Post.new(uri)
@@ -122,17 +122,6 @@ class Qinium
 
     def success?(http_code)
       self.class.success?(http_code)
-    end
-
-    def self.to_query(params)
-      if params.is_a?(Hash)
-        total_param = params.map do |key, value|
-          %(#{CGI.escape(key.to_s)}=#{CGI.escape(value.to_s).gsub("+", "%20")})
-        end
-        return total_param.join("&")
-      end
-
-      params
     end
   end
 end

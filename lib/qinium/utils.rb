@@ -31,7 +31,7 @@ class Qinium
         value = hash[key]
         next if value.nil?
 
-        args.push("#{CGI.escape(key.to_s)}=#{CGI.escape(value.to_s)}")
+        args.push("#{CGI.escape(key.to_s)}=#{CGI.escape(value.to_s).gsub("+", "%20")}")
       end
       args.join("&")
     end

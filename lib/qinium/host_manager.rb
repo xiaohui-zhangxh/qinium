@@ -64,7 +64,7 @@ class Qinium
       raise Error, "bucket is missing" if Utils.blank?(bucket)
 
       cache.read(access_key, bucket) do
-        query = Client.to_query(ak: access_key, bucket: bucket)
+        query = Utils.to_query_string(ak: access_key, bucket: bucket)
         url = "#{config.uc_host}/v1/query?#{query}"
         http = Client.new(config)
         code, body, headers = http.get(url)
