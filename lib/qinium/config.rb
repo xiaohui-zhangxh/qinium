@@ -35,7 +35,7 @@ class Qinium
         enable_debug: true,
         tmpdir: Dir.tmpdir + File::SEPARATOR + "QiniuRuby",
         multi_region: false,
-        bucket_private: false
+        public: true
       }.freeze
     end
 
