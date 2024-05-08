@@ -32,5 +32,50 @@ class Qinium
       sign = calculate_hmac_sha1_digest(secret_key, signing_str)
       Utils.urlsafe_base64_encode(sign)
     end
+
+    def authorize_download_url(domain, key, access_key, secret_key, args = {})
+      url_encoded_key = CGI::escape(key)
+      schema = args[:schema] || "http"
+      port   = args[:port]
+
+      if port.nil? then
+        download_url = "#{schema}://#{domain}/#{url_encoded_key}"
+      else
+        download_url = "#{schema}://#{domain}:#{port}/#{url_encoded_key}"
+      end
+
+      ### URL变换：追加FOP指令
+      if args[:fop].is_a?(String) && args[:fop] != '' then
+        if download_url.include?('?')
+          # 已有参数
+          download_url = "#{download_url}&#{args[:fop]}"
+        else
+          # 尚无参数
+          download_url = "#{download_url}?#{args[:fop]}"
+        end
+      end
+
+      ### 授权期计算
+      e = Time.now.to_i + args[:expires_in]
+
+      ### URL变换：追加授权期参数
+      if download_url.include?('?')
+        # 已有参数
+        download_url = "#{download_url}&e=#{e}"
+      else
+        # 尚无参数
+        download_url = "#{download_url}?e=#{e}"
+      end
+
+      ### 生成数字签名
+      sign = calculate_hmac_sha1_digest(secret_key, download_url)
+      encoded_sign = Utils.urlsafe_base64_encode(sign)
+
+      ### 生成下载授权凭证
+      dntoken = "#{access_key}:#{encoded_sign}"
+
+      ### 返回下载授权URL
+      "#{download_url}&token=#{dntoken}"
+    end
   end
 end
