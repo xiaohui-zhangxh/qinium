@@ -10,6 +10,7 @@ RSpec.describe Qinium do
     it { expect(config.protocol).to eq :https }
     it { expect(config.uc_host).to eq "https://uc.qbox.me" }
     it { expect(config.up_host(bucket)).to eq "https://up-z2.qbox.me" }
+    it { expect(config.public).to be_truthy }
   end
 
   context "HostManager" do
