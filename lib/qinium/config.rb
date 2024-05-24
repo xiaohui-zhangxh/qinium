@@ -14,6 +14,10 @@ class Qinium
       HostManager.new(self).up_host(bucket)
     end
 
+   def fetch_host(bucket = self.bucket, opts = {})
+      self[:fetch_host] || HostManager.new(self).fetch_host(bucket, opts)
+    end
+
     def put_policy_options
       @put_policy_options ||= self[:put_policy_options] || Configurable.new
     end

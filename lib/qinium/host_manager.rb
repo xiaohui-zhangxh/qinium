@@ -59,6 +59,11 @@ class Qinium
       hosts[extract_protocol(opts)]["up"]
     end
 
+    def fetch_host(bucket, opts = {})
+      hosts = hosts(bucket)
+      hosts[extract_protocol(opts)]["io"][0]
+    end
+
     def hosts(bucket)
       raise Error, "access_key is missing" if Utils.blank?(access_key)
       raise Error, "bucket is missing" if Utils.blank?(bucket)
