@@ -41,6 +41,12 @@ class Qinium
       ))
     end
 
+    def fetch(target_url, key, bucket: self.bucket)
+      client.management_post(config.fetch_host(bucket) + '/fetch/' + urlsafe_base64_encode(target_url) + '/to/' + Utils.encode_entry_uri(
+        bucket, key
+      ))
+    end
+
     def list(bucket: self.bucket, marker: "", limit: 1000, prefix: "", delimiter: "")
       query_string = to_query_string(bucket: bucket, marker: marker, limit: limit, prefix: prefix,
                                      delimiter: delimiter)
