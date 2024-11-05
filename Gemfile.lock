@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    qinium (0.1.2)
+    qinium (0.3.1)
 
 GEM
   remote: https://rubygems.org/
@@ -65,4 +65,4 @@ DEPENDENCIES
   webmock (~> 3.17)
 
 BUNDLED WITH
-   2.3.9
+   2.5.16
