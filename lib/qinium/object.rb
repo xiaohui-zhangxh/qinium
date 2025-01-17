@@ -47,6 +47,13 @@ class Qinium
       ))
     end
 
+    def copy(source_bucket, source_key, target_bucket, target_key)
+      source_encoded_entry_uri = Utils.encode_entry_uri(source_bucket, source_key)
+      target_encoded_entry_uri = Utils.encode_entry_uri(target_bucket, target_key)
+      uri = %Q(/copy/#{source_encoded_entry_uri}/#{target_encoded_entry_uri})
+      client.management_post(config.rs_host + uri)
+    end
+
     def list(bucket: self.bucket, marker: "", limit: 1000, prefix: "", delimiter: "")
       query_string = to_query_string(bucket: bucket, marker: marker, limit: limit, prefix: prefix,
                                      delimiter: delimiter)
