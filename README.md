@@ -14,7 +14,22 @@ If bundler is not being used to manage dependencies, install the gem by executin
 
 ## Usage
 
-TODO: Write usage instructions here
+### `up_host`（可选）
+
+只传**域名**即可（不要带 `http://` / `https://`）。协议由配置里的 **`protocol`** 决定（默认 `:https`；需要走 HTTP 时设 `protocol: :http`）。
+
+不传 `up_host` 时，仍通过七牛 UC 解析上传域（与旧版一致）。
+
+```ruby
+Qinium.new(
+  bucket: "my-bucket",
+  access_key: ENV["QINIU_AK"],
+  secret_key: ENV["QINIU_SK"],
+  protocol: :https, # 或 :http
+  up_host: "xxx.kodo-accelerate.ap-southeast-1.qiniucs.com"
+)
+# => #up_host 返回 "https://xxx..." 或 "http://xxx..."（视 protocol）
+```
 
 ## Development
 

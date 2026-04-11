@@ -11,10 +11,15 @@ class Qinium
     end
 
     def up_host(bucket = self.bucket)
-      HostManager.new(self).up_host(bucket)
+      raw = self[:up_host]
+      if raw.present?
+        normalize_qiniu_up_base_url(raw.to_s)
+      else
+        HostManager.new(self).up_host(bucket)
+      end
     end
 
-   def fetch_host(bucket = self.bucket, opts = {})
+    def fetch_host(bucket = self.bucket, opts = {})
       self[:fetch_host] || HostManager.new(self).fetch_host(bucket, opts)
     end
 
@@ -23,6 +28,16 @@ class Qinium
     end
 
     private
+
+    # Bare hostname is typical; optional full http(s) URL. Scheme defaults from #protocol.
+    def normalize_qiniu_up_base_url(url)
+      s = url.strip.sub(%r{/+\z}, "")
+      return s if s.match?(%r{\Ahttps?://}i)
+
+      # 仅域名时：http(s) 由 protocol 决定（支持 Symbol 或 ENV 里的 "http"/"https" 字符串）
+      proto = protocol.to_s.downcase == "http" ? "http" : "https"
+      "#{proto}://#{s.sub(%r{\A//+}, "")}"
+    end
 
     def default_options
       {
