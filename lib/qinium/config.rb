@@ -12,7 +12,7 @@ class Qinium
 
     def up_host(bucket = self.bucket)
       raw = self[:up_host]
-      if raw.present?
+      unless raw.to_s.strip.empty?
         normalize_qiniu_up_base_url(raw.to_s)
       else
         HostManager.new(self).up_host(bucket)
